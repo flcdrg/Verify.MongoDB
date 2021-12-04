@@ -2,67 +2,29 @@
   target: collection,
   mongo: [
     {
-      Type: isMaster,
-      Document: {
-        client: {
-          driver: {
-            name: mongo-csharp-driver,
-            version: 2.5.0.0
-          },
-          os: {
-            architecture: x86_64,
-            name: Microsoft Windows 10.0.19044,
-            type: Windows,
-            version: 10.0.19044
-          },
-          platform: .NET 6.0.0-rtm.21522.10
-        },
-        isMaster: 1
-      }
-    },
-    {
-      Type: buildInfo,
-      Document: {
-        buildInfo: 1
-      }
-    },
-    {
-      Type: saslStart
-    },
-    {
-      Type: saslContinue
-    },
-    {
-      Type: saslContinue
-    },
-    {
-      Type: getLastError,
-      Document: {
-        getLastError: 1
-      }
-    },
-    {
       Type: insert,
+      Database: VerifyTests,
       Document: {
         documents: [
           {
-            _id: {
-              $oid: 61aa1176bdd605343cbb4cbf
-            }
+            _id: Guid_1
           }
         ],
         insert: docs,
         ordered: true
-      }
+      },
+      StartTime: DateTimeOffset_1
     },
     {
       Type: find,
+      Database: VerifyTests,
       Document: {
         filter: {
           _id: blah
         },
         find: docs
-      }
+      },
+      StartTime: DateTimeOffset_2
     }
   ]
 }

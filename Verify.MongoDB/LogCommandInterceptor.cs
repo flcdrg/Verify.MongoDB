@@ -26,12 +26,12 @@ public class LogCommandInterceptor
         Add(@event.CommandName, @event.Command, @event.DatabaseNamespace.DatabaseName);
     }
 
-    static void Add(string type, BsonDocument document, string database)
+    private static void Add(string type, BsonDocument document, string database)
     {
-        asyncLocal.Value?.WriteLine(new LogEntry(type, document));
+        asyncLocal.Value?.WriteLine(new LogEntry(type, document, database));
     }
 
-    class State
+    private class State
     {
         internal readonly ConcurrentQueue<LogEntry> Events = new();
 
