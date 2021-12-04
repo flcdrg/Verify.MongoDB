@@ -21,6 +21,17 @@ public static class VerifyMongoDb
 
         VerifierSettings.ModifySerialization(settings =>
         {
+            // lsid is returned in the BsonDocument and looks similar to this:
+            //
+            //lsid: {
+            //  id: {
+            //    $binary: u8BR6E8vV0GVWvIEN4xWXA==,
+            //    $type: 03
+            //  }
+            //},
+            settings.IgnoreMember("lsid");
+
+
             settings.AddExtraSettings(serializer =>
             {
         //        var converters = serializer.Converters;

@@ -22,7 +22,6 @@ public class LogCommandInterceptor
 
     public void Command(CommandStartedEvent @event)
     {
-        
         Add(@event.CommandName, @event.Command, @event.DatabaseNamespace.DatabaseName);
     }
 
