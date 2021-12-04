@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp3.1;net6.0</TargetFrameworks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	<RootNamespace>$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
+    <LangVersion>10</LangVersion>
+  </PropertyGroup>
+
+	<ItemGroup>
+      <PackageReference Include="MongoDB.Driver" Version="2.5.0" />
+      <PackageReference Include="Verify" Version="14.7.0" />
+      <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" Condition="$(Configuration) == 'Release'" />
+	</ItemGroup>
+</Project>

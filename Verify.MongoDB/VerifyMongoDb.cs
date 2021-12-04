@@ -1,0 +1,32 @@
+﻿namespace VerifyTests;
+
+public static class VerifyMongoDb
+{
+    public static void Enable()
+    {
+        VerifierSettings.RegisterJsonAppender(_ =>
+        {
+            var entries = LogCommandInterceptor.Stop();
+            if (entries is null)
+            {
+                return null;
+            }
+
+            return new ToAppend("mongo", entries);
+        });
+
+        //VerifierSettings.RegisterFileConverter(
+        //    QueryableToSql,
+        //    (target, _, _) => QueryableConverter.IsQueryable(target));
+
+        VerifierSettings.ModifySerialization(settings =>
+        {
+            settings.AddExtraSettings(serializer =>
+            {
+        //        var converters = serializer.Converters;
+        //        converters.Add(new TrackerConverter());
+        //        converters.Add(new QueryableConverter());
+            });
+        });
+    }
+}
