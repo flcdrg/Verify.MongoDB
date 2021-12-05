@@ -36,6 +36,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <CopyToPublishDirectory>Never</CopyToPublishDirectory>
     </None>
+    <None Update="IntegrationTests.Test1.verified.txt">
+      <DependentUpon>IntegrationTests.cs</DependentUpon>
+    </None>
   </ItemGroup>
 
   <Target Name="CreateLocalSettingsJson" Inputs="local.settings.template.json" Outputs="local.settings.json" Condition="!exists('local.settings.json')" BeforeTargets="BeforeBuild;Restore">

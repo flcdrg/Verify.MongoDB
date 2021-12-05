@@ -15,7 +15,7 @@ public static class VerifyMongoDb
             return new ToAppend("mongo", entries);
         });
 
-        //VerifierSettings.RegisterFileConverter(
+        //VerifierSettings.RegisterFileConverter()
         //    QueryableToSql,
         //    (target, _, _) => QueryableConverter.IsQueryable(target));
 

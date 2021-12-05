@@ -1,0 +1,19 @@
+﻿{
+  target: collection,
+  mongo: [
+    {
+      Type: insert,
+      Database: VerifyTests,
+      Document: {
+        documents: [
+          {
+            _id: Guid_1
+          }
+        ],
+        insert: docs,
+        ordered: true
+      },
+      StartTime: DateTimeOffset_1
+    }
+  ]
+}

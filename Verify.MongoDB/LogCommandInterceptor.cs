@@ -22,12 +22,12 @@ public class LogCommandInterceptor
 
     public void Command(CommandStartedEvent @event)
     {
-        Add(@event.CommandName, @event.Command, @event.DatabaseNamespace.DatabaseName);
+        asyncLocal.Value?.WriteLine(new LogEntry(@event.CommandName, @event.Command, @event.DatabaseNamespace.DatabaseName));
     }
 
-    private static void Add(string type, BsonDocument document, string database)
+    public void Command(CommandSucceededEvent @event)
     {
-        asyncLocal.Value?.WriteLine(new LogEntry(type, document, database));
+        asyncLocal.Value?.WriteLine(new LogEntry(@event.CommandName, @event.Reply, string.Empty));
     }
 
     private class State

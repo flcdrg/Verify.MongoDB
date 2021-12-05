@@ -1,0 +1,16 @@
+﻿{
+  target: collection,
+  mongo: [
+    {
+      Type: find,
+      Database: VerifyTests,
+      Document: {
+        filter: {
+          _id: blah
+        },
+        find: docs
+      },
+      StartTime: DateTimeOffset_1
+    }
+  ]
+}

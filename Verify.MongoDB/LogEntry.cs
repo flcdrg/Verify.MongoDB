@@ -1,7 +1,5 @@
-﻿using System.Data.Common;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Bson.IO;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace VerifyTests;
@@ -14,7 +12,7 @@ public class LogEntry
         Database = database;
 
         var jsonWriterSettings = new JsonWriterSettings { OutputMode = JsonOutputMode.Strict };
-        Document = JObject.Parse(document.ToJson<MongoDB.Bson.BsonDocument>(jsonWriterSettings));
+        Document = JObject.Parse(document.ToJson(jsonWriterSettings));
         StartTime = DateTimeOffset.Now;
     }
 
