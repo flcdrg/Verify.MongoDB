@@ -1,5 +1,4 @@
 ﻿using System.Collections.Concurrent;
-using MongoDB.Bson;
 using MongoDB.Driver.Core.Events;
 
 namespace VerifyTests;
@@ -13,7 +12,7 @@ public class LogCommandInterceptor
         asyncLocal.Value = new State();
     }
 
-    public static IEnumerable<LogEntry>? Stop()
+    public static IEnumerable<LogEntryBase>? Stop()
     {
         var state = asyncLocal.Value;
         asyncLocal.Value = null;
@@ -22,19 +21,23 @@ public class LogCommandInterceptor
 
     public void Command(CommandStartedEvent @event)
     {
-        asyncLocal.Value?.WriteLine(new LogEntry(@event.CommandName, @event.Command, @event.DatabaseNamespace.DatabaseName));
+        asyncLocal.Value?.WriteLine(new StartedLogEntry(@event.CommandName, @event.Command, @event.DatabaseNamespace.DatabaseName, @event.ConnectionId, @event.OperationId, @event.RequestId));
     }
 
     public void Command(CommandSucceededEvent @event)
     {
-        asyncLocal.Value?.WriteLine(new LogEntry(@event.CommandName, @event.Reply, string.Empty));
+        asyncLocal.Value?.WriteLine(new SucceededLogEntry(@event.CommandName, @event.Reply, @event.Duration, @event.ConnectionId, @event.OperationId, @event.RequestId));
     }
 
+    public void Command(CommandFailedEvent @event)
+    {
+        asyncLocal.Value?.WriteLine(new FailedLogEntry(@event.CommandName, @event.Failure, @event.Duration, @event.ConnectionId, @event.OperationId, @event.RequestId ));
+    }
     private class State
     {
-        internal readonly ConcurrentQueue<LogEntry> Events = new();
+        internal readonly ConcurrentQueue<LogEntryBase> Events = new();
 
-        public void WriteLine(LogEntry entry)
+        public void WriteLine(LogEntryBase entry)
         {
             Events.Enqueue(entry);
         }

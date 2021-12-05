@@ -15,10 +15,6 @@ public static class VerifyMongoDb
             return new ToAppend("mongo", entries);
         });
 
-        //VerifierSettings.RegisterFileConverter()
-        //    QueryableToSql,
-        //    (target, _, _) => QueryableConverter.IsQueryable(target));
-
         VerifierSettings.ModifySerialization(settings =>
         {
             // lsid is returned in the BsonDocument and looks similar to this:
@@ -29,15 +25,9 @@ public static class VerifyMongoDb
             //    $type: 03
             //  }
             //},
+            // Ignore as the binary value changes each time
             settings.IgnoreMember("lsid");
 
-
-            settings.AddExtraSettings(serializer =>
-            {
-        //        var converters = serializer.Converters;
-        //        converters.Add(new TrackerConverter());
-        //        converters.Add(new QueryableConverter());
-            });
         });
     }
 }

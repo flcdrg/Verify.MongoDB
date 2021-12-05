@@ -4,27 +4,29 @@
     {
       Database: VerifyTests,
       Document: {
-        documents: [
-          {
-            _id: Guid_1
-          }
-        ],
-        insert: docs,
-        ordered: true
+        filter: {
+          _id: blah
+        },
+        find: docs,
+        maxTimeMS: 1.0
       },
       Type: Started,
-      Command: insert,
+      Command: find,
       StartTime: DateTimeOffset_1,
       OperationId: Id_1,
       RequestId: Id_2
     },
     {
       Document: {
-        n: 1,
+        cursor: {
+          firstBatch: [],
+          id: 0,
+          ns: VerifyTests.docs
+        },
         ok: 1.0
       },
       Type: Succeeded,
-      Command: insert,
+      Command: find,
       StartTime: DateTimeOffset_2,
       OperationId: Id_1,
       RequestId: Id_2
