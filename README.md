@@ -4,6 +4,8 @@
 
 Extends [Verify](https://github.com/VerifyTests/Verify) to allow verification of MongoDB bits.
 
+Verify.MongoDB is heavily inspired by @SimonCropp's [Verify.EntityFramework](https://github.com/VerifyTests/Verify.EntityFramework)
+
 ## Enable
 
 Enable VerifyMongoDb once at assembly load time:
