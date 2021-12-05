@@ -12,12 +12,15 @@ namespace Verify.MongoDB.Tests;
 [UsesVerify]
 public class IntegrationTests
 {
+    static IntegrationTests()
+    {
+        VerifyMongoDb.Enable();
+    }
+
     [Fact]
     public async Task FindAsync()
     {
         var configuration = GetConfiguration();
-
-        VerifyMongoDb.Enable();
 
         var clientSettings = MongoClientSettings.FromUrl(new MongoUrl(configuration["MongoConnectionString"]));
 
@@ -31,7 +34,7 @@ public class IntegrationTests
 
         var collection = database.GetCollection<BsonDocument>("docs");
 
-        MongoRecording.StartRecording();
+        MongoDBRecording.StartRecording();
 
         await collection.FindAsync(Builders<BsonDocument>.Filter.Eq("_id", "blah"),
             new FindOptions<BsonDocument, BsonDocument>());
@@ -44,8 +47,6 @@ public class IntegrationTests
     {
         var configuration = GetConfiguration();
 
-        VerifyMongoDb.Enable();
-
         var clientSettings = MongoClientSettings.FromUrl(new MongoUrl(configuration["MongoConnectionString"]));
 
         clientSettings.EnableRecording();
@@ -58,7 +59,7 @@ public class IntegrationTests
 
         var collection = database.GetCollection<BsonDocument>("docs");
 
-        MongoRecording.StartRecording();
+        MongoDBRecording.StartRecording();
 
         await collection.InsertOneAsync(new BsonDocument()
         {

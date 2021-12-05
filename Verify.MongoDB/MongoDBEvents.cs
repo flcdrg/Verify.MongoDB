@@ -1,7 +1,7 @@
 namespace Verify.MongoDB;
 
 [Flags]
-public enum MongoEvents
+public enum MongoDBEvents
 {
     Started = 1,
     Succeeded = 2,

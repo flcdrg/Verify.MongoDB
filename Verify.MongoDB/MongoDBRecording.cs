@@ -3,25 +3,25 @@ using MongoDB.Driver.Core.Events;
 
 namespace Verify.MongoDB;
 
-public static class MongoRecording
+public static class MongoDBRecording
 {
-    public static void EnableRecording(this MongoClientSettings mongoClientSettings, MongoEvents events = MongoEvents.All)
+    public static void EnableRecording(this MongoClientSettings mongoClientSettings, MongoDBEvents events = MongoDBEvents.All)
     {
         mongoClientSettings.ClusterConfigurator = builder =>
         {
             var log = new LogCommandInterceptor();
 
-            if ((events & MongoEvents.Started) == MongoEvents.Started)
+            if ((events & MongoDBEvents.Started) == MongoDBEvents.Started)
             {
                 builder.Subscribe<CommandStartedEvent>(@event => log.Command(@event));
             }
 
-            if ((events & MongoEvents.Succeeded) == MongoEvents.Succeeded)
+            if ((events & MongoDBEvents.Succeeded) == MongoDBEvents.Succeeded)
             {
                 builder.Subscribe<CommandSucceededEvent>(@event => log.Command(@event));
             }
 
-            if ((events & MongoEvents.Failed) == MongoEvents.Failed)
+            if ((events & MongoDBEvents.Failed) == MongoDBEvents.Failed)
             {
                 builder.Subscribe<CommandFailedEvent>(@event => log.Command(@event));
             }
