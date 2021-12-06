@@ -1,5 +1,8 @@
 name: .NET
 
+env:
+  configuration: Release
+
 on:
   push:
     branches: [ main ]
@@ -7,6 +10,31 @@ on:
     branches: [ main ]
 
 jobs:
+  dump:
+    name: Dump
+    runs-on: ubuntu-latest
+    permissions:
+      actions: none
+
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
+      - name: Dump event context
+        env:
+          EVENT_CONTEXT: ${{ toJSON(github.event) }}
+        run: echo "$EVENT_CONTEXT"
+
+      - name: Dump job context
+        env:
+          JOB_CONTEXT: ${{ toJSON(job) }}
+        run: echo "$JOB_CONTEXT"
+
+      - name: Dump environment
+        run: printenv | sort
+
   build:
 
     services:
@@ -18,15 +46,34 @@ jobs:
         
     runs-on: ubuntu-latest
 
+    env:
+      RepositoryUrl: https://github.com/${{ github.repository }}
+      source-url: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
+      version: 0.0.1-beta.${{ github.run_number }}
+
     steps:
     - uses: actions/checkout@v2
+
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 6.0.x
+        source-url: ${{ env.source-url }}
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
     - name: Restore dependencies
       run: dotnet restore
+
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore  -p:Version=${{ env.version }} -p:RepositoryUrl=${{ env.RepositoryUrl }}
+
     - name: Test
       run: dotnet test --no-build --verbosity normal
+
+    - name: Pack
+      run: dotnet pack --no-build  -p:Version=${{ env.version }} -p:RepositoryUrl=${{ env.RepositoryUrl }}
+
+    - name: Publish the package to GPR
+      run: dotnet nuget push "Verify.MongoDB/bin/Release/*.nupkg" --source ${{ env.source-url }} -k ${{ secrets.GITHUB_TOKEN }}
+      if: github.ref == 'refs/heads/main'
