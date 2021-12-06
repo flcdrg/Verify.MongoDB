@@ -45,7 +45,6 @@ await collection.FindAsync(Builders<BsonDocument>.Filter.Eq("_id", "blah"),
     new FindOptions<BsonDocument, BsonDocument>());
     
 await Verifier.Verify("collection");
-
 ```
 
 Will result in the following verified file:

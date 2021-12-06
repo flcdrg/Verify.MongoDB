@@ -40,6 +40,6 @@ public static class MongoDBRecording
         {
             return entries;
         }
-        throw new Exception("No recorded state. It is possible `MongoRecording.StartRecording()` has not been called on the MongoClient.");
+        throw new("No recorded state. It is possible `MongoRecording.StartRecording()` has not been called on the MongoClient.");
     }
 }
