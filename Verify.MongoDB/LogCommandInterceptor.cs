@@ -9,7 +9,7 @@ public class LogCommandInterceptor
 
     public static void Start()
     {
-        asyncLocal.Value = new State();
+        asyncLocal.Value = new();
     }
 
     public static IEnumerable<LogEntryBase>? Stop()

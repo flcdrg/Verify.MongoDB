@@ -1,11 +1,6 @@
-using System.IO;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using VerifyTests;
-using VerifyXunit;
-using Xunit;
 
 namespace Verify.MongoDB.Tests;
 
@@ -22,7 +17,7 @@ public class IntegrationTests
     {
         var configuration = GetConfiguration();
 
-        var clientSettings = MongoClientSettings.FromUrl(new MongoUrl(configuration["MongoConnectionString"]));
+        var clientSettings = MongoClientSettings.FromUrl(new(configuration["MongoConnectionString"]));
 
         clientSettings.EnableRecording();
 
@@ -38,7 +33,7 @@ public class IntegrationTests
 
         await collection.FindAsync(Builders<BsonDocument>.Filter.Eq("_id", "blah"),
             new FindOptions<BsonDocument, BsonDocument>());
-            
+
         await Verifier.Verify("collection");
     }
 
@@ -47,7 +42,7 @@ public class IntegrationTests
     {
         var configuration = GetConfiguration();
 
-        var clientSettings = MongoClientSettings.FromUrl(new MongoUrl(configuration["MongoConnectionString"]));
+        var clientSettings = MongoClientSettings.FromUrl(new(configuration["MongoConnectionString"]));
 
         clientSettings.EnableRecording();
 
@@ -61,7 +56,7 @@ public class IntegrationTests
 
         MongoDBRecording.StartRecording();
 
-        await collection.InsertOneAsync(new BsonDocument()
+        await collection.InsertOneAsync(new()
         {
             {"_id", "C2E1B774-A997-4818-B104-E915F7DCA9C1"}
         });
@@ -71,10 +66,9 @@ public class IntegrationTests
 
     private static IConfigurationRoot GetConfiguration()
     {
-        var configuration = new ConfigurationBuilder()
+        return new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("local.settings.json", false)
             .Build();
-        return configuration;
     }
 }
