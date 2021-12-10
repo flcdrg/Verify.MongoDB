@@ -49,10 +49,12 @@ jobs:
     env:
       RepositoryUrl: https://github.com/${{ github.repository }}
       source-url: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
-      version: 0.0.1-beta.${{ github.run_number }}
+      # version: 0.0.1-beta.${{ github.run_number }}
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0 # full history
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
@@ -65,17 +67,25 @@ jobs:
         NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
     - name: Restore dependencies
-      run: dotnet restore
+      run: |
+        dotnet restore
+        dotnet tool restore
 
     - name: Build
-      run: dotnet build --no-restore  -p:Version=${{ env.version }} -p:RepositoryUrl=${{ env.RepositoryUrl }}
+      run: dotnet build --no-restore -p:RepositoryUrl=${{ env.RepositoryUrl }} /bl
 
     - name: Test
       run: dotnet test --no-build --verbosity normal
 
     - name: Pack
-      run: dotnet pack --no-build  -p:Version=${{ env.version }} -p:RepositoryUrl=${{ env.RepositoryUrl }}
+      run: dotnet pack --no-build -p:RepositoryUrl=${{ env.RepositoryUrl }} /bl:LogFile=msbuild-pack.binlog
 
     - name: Publish the package to GPR
       run: dotnet nuget push "Verify.MongoDB/bin/Release/*.nupkg" --source ${{ env.source-url }} -k ${{ secrets.GITHUB_TOKEN }}
       if: github.ref == 'refs/heads/main'
+
+    - name: Build logs
+      uses: actions/upload-artifact@v2.3.0
+      with:
+        # A file, directory or wildcard pattern that describes what to upload
+        path: '*.binlog'

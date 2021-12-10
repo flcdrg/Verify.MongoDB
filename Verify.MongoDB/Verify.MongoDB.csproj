@@ -3,6 +3,17 @@
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.1;net6.0</TargetFrameworks>
     <RootNamespace>$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
+    <PackageProjectUrl>https://github.com/flcdrg/Verify.MongoDB</PackageProjectUrl>
+    <PackageTags>Verify, MongoDB</PackageTags>
+    <Description>Extends Verify (https://github.com/VerifyTests/Verify) to allow verification of MongoDB bits.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Copyright $([System.DateTime]::UtcNow.ToString(yyyy)). All rights reserved</Copyright>
+    <DebugType>embedded</DebugType>
+    <Authors>https://github.com/flcdrg/Verify.MongoDB/graphs/contributors</Authors>
+
+    <!-- SourceLink -->
+    <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
