@@ -10,6 +10,10 @@
     <Copyright>Copyright $([System.DateTime]::UtcNow.ToString(yyyy)). All rights reserved</Copyright>
     <DebugType>embedded</DebugType>
     <Authors>https://github.com/flcdrg/Verify.MongoDB/graphs/contributors</Authors>
+
+    <!-- SourceLink -->
+    <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
