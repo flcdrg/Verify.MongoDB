@@ -9,3 +9,11 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    # We want to manually review these PRs, so use different label to that used by merge-dependabot.yml
+    labels:
+      - "dependencies-actions"
