@@ -6,6 +6,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+<PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+  <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  <DeterministicSourcePaths>true</DeterministicSourcePaths>
+</PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Nerdbank.GitVersioning">
       <Version>3.4.244</Version>
