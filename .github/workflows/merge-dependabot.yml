@@ -1,20 +1,25 @@
-name: merge-dependabot
-on: 
-  push:
-    branches:
-      - dependabot*
-      - master
-  pull_request:
-    branches:
-      - dependabot*
-      - master
+# https://docs.github.com/en/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/automating-dependabot-with-github-actions#enable-auto-merge-on-a-pull-request
+# Auto merge Dependabot PRs which are minor or patch-level semver changes
+name: Dependabot auto-merge
+on: pull_request
+
+permissions:
+  pull-requests: write
+  contents: write
+
 jobs:
-  automerge:
+  dependabot:
     runs-on: ubuntu-latest
-    if: github.actor == 'dependabot[bot]'
+    if: ${{ github.actor == 'dependabot[bot]' }}
     steps:
-      - name: Automerge Dependecies
-        uses: "pascalgn/automerge-action@v0.14.3"
+      - name: Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v1.1.1
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+      - name: Enable auto-merge for Dependabot PRs
+        if: ${{steps.metadata.outputs.update-type == 'version-update:semver-minor' || steps.metadata.outputs.update-type == 'version-update:semver-patch'}}
+        run: gh pr merge --auto --merge "$PR_URL"
         env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          MERGE_LABELS: "dependencies"
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
