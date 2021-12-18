@@ -66,10 +66,6 @@ jobs:
       env:
         NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-    - name: Restore dependencies
-      run: |
-        dotnet tool restore
-
     - name: Build
       run: dotnet build -p:RepositoryUrl=${{ env.RepositoryUrl }} /bl
 
