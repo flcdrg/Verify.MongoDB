@@ -129,6 +129,7 @@ jobs:
         uses: xresloader/upload-to-github-release@v1
         with:
           file: "./nupkg/**/*.nupkg"
+          delete_file: "*.nupkg"
           overwrite: true
           release_id: ${{ steps.create_release.outputs.id }}
         env:
