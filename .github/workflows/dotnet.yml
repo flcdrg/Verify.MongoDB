@@ -72,14 +72,14 @@ jobs:
     - name: Build
       run: dotnet build -p:RepositoryUrl=${{ env.RepositoryUrl }} /bl
 
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
-
     # Set GitBuildVersionSimple output variable
     - name: gitversion
       id: gitversion
       run: |
-        echo "::set-output name=GitBuildVersionSimple::$($env:GitBuildVersionSimple)" 
+        echo "::set-output name=GitBuildVersionSimple::$GitBuildVersionSimple" 
+
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
 
     - name: Publish the package to GPR
       run: dotnet nuget push "Verify.MongoDB/bin/Release/*.nupkg" --source ${{ env.source-url }} -k ${{ secrets.GITHUB_TOKEN }}
@@ -116,8 +116,6 @@ jobs:
           version: ${{ needs.build.outputs.GitBuildVersionSimple }}
 
       - uses: actions/download-artifact@v2
-        with:
-          path: nupkgs
           
       - name: Display structure of downloaded files
         run: ls -R 
@@ -130,7 +128,7 @@ jobs:
       - name: Upload assets
         uses: xresloader/upload-to-github-release@v1
         with:
-          file: "./nupkgs/**/*.nupkg"
+          file: "./nupkg/**/*.nupkg"
           overwrite: true
           release_id: ${{ steps.create_release.outputs.id }}
         env:
