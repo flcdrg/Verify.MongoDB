@@ -52,7 +52,6 @@ jobs:
     env:
       RepositoryUrl: https://github.com/${{ github.repository }}
       source-url: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
-      # version: 0.0.1-beta.${{ github.run_number }}
 
     steps:
     - uses: actions/checkout@v2
@@ -97,7 +96,7 @@ jobs:
       with:
         name: nupkg
         # A file, directory or wildcard pattern that describes what to upload
-        path: 'Verify.MongoDB/bin/Release/*.nupkg'       
+        path: 'Verify.MongoDB/bin/Release/*.nupkg'
 
   update_release_draft:
     name: Update release draft
