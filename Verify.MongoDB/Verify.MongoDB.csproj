@@ -20,7 +20,7 @@
   <ItemGroup>
       <!-- Stick with MongoDB.Driver 2.5.0 so we work with that and above -->
       <PackageReference Include="MongoDB.Driver" Version="2.5.0" />
-      <PackageReference Include="Verify" Version="14.14.1" />
+      <PackageReference Include="Verify" Version="16.1.1" />
       <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" Condition="$(Configuration) == 'Release'" />
 	</ItemGroup>
 </Project>
