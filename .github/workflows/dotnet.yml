@@ -54,7 +54,7 @@ jobs:
       source-url: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 0 # full history
 
@@ -105,7 +105,7 @@ jobs:
 
     if: github.ref == 'refs/heads/main' # Running this job only for main branch
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - uses: release-drafter/release-drafter@v5
         id: create_release
