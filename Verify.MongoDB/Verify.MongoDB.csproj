@@ -11,7 +11,8 @@
     <DebugType>embedded</DebugType>
     <Authors>https://github.com/flcdrg/Verify.MongoDB/graphs/contributors</Authors>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  
 	<!-- SourceLink -->
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
@@ -23,4 +24,8 @@
       <PackageReference Include="Verify" Version="14.14.1" />
       <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" Condition="$(Configuration) == 'Release'" />
 	</ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
 </Project>
