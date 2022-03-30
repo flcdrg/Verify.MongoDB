@@ -84,6 +84,12 @@ jobs:
       run: dotnet nuget push "Verify.MongoDB/bin/Release/*.nupkg" --source ${{ env.source-url }} -k ${{ secrets.GITHUB_TOKEN }}
       if: github.ref == 'refs/heads/main'
 
+    - name: Publish the package to nuget.org
+      run: dotnet nuget push "Verify.MongoDB/bin/Release/*.nupkg" --source https://api.nuget.org/v3/index.json -k $NUGET_AUTH_TOKEN
+      env:
+        NUGET_AUTH_TOKEN: ${{ secrets.NUGET_API_KEY }}
+      if: github.ref == 'refs/heads/main'
+
     - name: Build logs
       uses: actions/upload-artifact@v3
       with:

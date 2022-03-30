@@ -1,6 +1,7 @@
 # Verify.MongoDB
 
 [![.NET](https://github.com/flcdrg/Verify.MongoDB/actions/workflows/dotnet.yml/badge.svg)](https://github.com/flcdrg/Verify.MongoDB/actions/workflows/dotnet.yml)
+[![NuGet Status](https://img.shields.io/nuget/v/Verify.MongoDB.svg?label=Verify.MongoDB)](https://www.nuget.org/packages/Verify.MongoDB/)
 
 Extends [Verify](https://github.com/VerifyTests/Verify) to allow verification of MongoDB bits.
 
@@ -36,7 +37,7 @@ clientSettings.EnableRecording(MongoDbEvents.Succeeded | MongoDbEvents.Failed);
 
 ### Usage
 
-To start recording call `MongoDbRecording.StartRecording()`. The results will be automatically included in verified file.
+To start recording call `MongoDbRecording.StartRecording()`. The results will be automatically included in the verified file.
 
 ```csharp
 MongoDBRecording.StartRecording();
