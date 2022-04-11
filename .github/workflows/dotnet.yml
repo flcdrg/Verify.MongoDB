@@ -120,7 +120,7 @@ jobs:
         with:
           version: ${{ needs.build.outputs.GitBuildVersionSimple }}
 
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v3
           
       - name: Display structure of downloaded files
         run: ls -R 
