@@ -15,19 +15,15 @@ public static class VerifyMongoDb
             return new ToAppend("mongo", entries);
         });
 
-        VerifierSettings.ModifySerialization(settings =>
-        {
-            // lsid is returned in the BsonDocument and looks similar to this:
-            //
-            //lsid: {
-            //  id: {
-            //    $binary: u8BR6E8vV0GVWvIEN4xWXA==,
-            //    $type: 03
-            //  }
-            //},
-            // Ignore as the binary value changes each time
-            settings.IgnoreMember("lsid");
-
-        });
+        // lsid is returned in the BsonDocument and looks similar to this:
+        //
+        //lsid: {
+        //  id: {
+        //    $binary: u8BR6E8vV0GVWvIEN4xWXA==,
+        //    $type: 03
+        //  }
+        //},
+        // Ignore as the binary value changes each time
+        VerifierSettings.IgnoreMember("lsid");
     }
 }
