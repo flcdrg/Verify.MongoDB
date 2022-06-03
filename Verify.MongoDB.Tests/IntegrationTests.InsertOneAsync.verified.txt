@@ -15,8 +15,8 @@
       Type: Started,
       Command: insert,
       StartTime: DateTimeOffset_1,
-      OperationId: Id_1,
-      RequestId: Id_2
+      OperationId: 4,
+      RequestId: 20
     },
     {
       Document: {
@@ -26,8 +26,8 @@
       Type: Succeeded,
       Command: insert,
       StartTime: DateTimeOffset_2,
-      OperationId: Id_1,
-      RequestId: Id_2
+      OperationId: 4,
+      RequestId: 20
     }
   ]
 }
