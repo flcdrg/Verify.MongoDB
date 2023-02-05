@@ -4,19 +4,20 @@
     {
       Database: VerifyTests,
       Document: {
+        insert: docs,
+        ordered: true,
+        $db: VerifyTests,
         documents: [
           {
             _id: Guid_1
           }
-        ],
-        insert: docs,
-        ordered: true
+        ]
       },
       Type: Started,
       Command: insert,
       StartTime: DateTimeOffset_1,
-      OperationId: 4,
-      RequestId: 20
+      OperationId: 5,
+      RequestId: 26
     },
     {
       Document: {
@@ -26,8 +27,8 @@
       Type: Succeeded,
       Command: insert,
       StartTime: DateTimeOffset_2,
-      OperationId: 4,
-      RequestId: 20
+      OperationId: 5,
+      RequestId: 26
     }
   ]
 }

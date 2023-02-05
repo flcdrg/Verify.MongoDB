@@ -1,5 +1,5 @@
-﻿using MongoDB.Driver.Core.Connections;
-using Newtonsoft.Json;
+﻿using Argon;
+using MongoDB.Driver.Core.Connections;
 
 namespace VerifyTests;
 
