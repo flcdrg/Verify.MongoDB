@@ -1,23 +1,33 @@
-using Microsoft.Extensions.Configuration;
+using EphemeralMongo;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace Verify.MongoDB.Tests;
 
 [UsesVerify]
-public class IntegrationTests
+public class IntegrationTests : IDisposable
 {
+    private IMongoRunner mongoRunner;
+
     static IntegrationTests()
     {
         VerifyMongoDb.Enable();
     }
 
+    public IntegrationTests()
+    {
+        mongoRunner = MongoRunner.Run();
+    }
+
+    public void Dispose()
+    {
+        mongoRunner?.Dispose();
+    }
+
     [Fact]
     public async Task FindAsync()
     {
-        var configuration = GetConfiguration();
-
-        var clientSettings = MongoClientSettings.FromUrl(new(configuration["MongoConnectionString"]));
+        var clientSettings = MongoClientSettings.FromConnectionString(mongoRunner.ConnectionString);
 
         clientSettings.EnableRecording();
 
@@ -40,9 +50,7 @@ public class IntegrationTests
     [Fact]
     public async Task InsertOneAsync()
     {
-        var configuration = GetConfiguration();
-
-        var clientSettings = MongoClientSettings.FromUrl(new(configuration["MongoConnectionString"]));
+        var clientSettings = MongoClientSettings.FromConnectionString(mongoRunner.ConnectionString);
 
         clientSettings.EnableRecording();
 
@@ -62,13 +70,5 @@ public class IntegrationTests
         });
 
         await Verifier.Verify("collection");
-    }
-
-    private static IConfigurationRoot GetConfiguration()
-    {
-        return new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("local.settings.json", false)
-            .Build();
     }
 }

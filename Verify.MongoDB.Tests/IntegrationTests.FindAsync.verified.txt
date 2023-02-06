@@ -4,21 +4,21 @@
     {
       Database: VerifyTests,
       Document: {
+        find: docs,
         filter: {
           _id: blah
         },
-        find: docs
+        $db: VerifyTests
       },
       Type: Started,
       Command: find,
       StartTime: DateTimeOffset_1,
       OperationId: 2,
-      RequestId: 10
+      RequestId: 9
     },
     {
       Document: {
         cursor: {
-          firstBatch: [],
           id: 0,
           ns: VerifyTests.docs
         },
@@ -28,7 +28,7 @@
       Command: find,
       StartTime: DateTimeOffset_2,
       OperationId: 2,
-      RequestId: 10
+      RequestId: 9
     }
   ]
 }
