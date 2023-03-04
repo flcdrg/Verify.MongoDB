@@ -19,10 +19,14 @@
     {
       Document: {
         cursor: {
-          id: 0,
+          id: {
+            $numberLong: 0
+          },
           ns: VerifyTests.docs
         },
-        ok: 1.0
+        ok: {
+          $numberDouble: 1.0
+        }
       },
       Type: Succeeded,
       Command: find,

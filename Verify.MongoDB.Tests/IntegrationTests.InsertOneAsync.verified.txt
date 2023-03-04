@@ -21,8 +21,12 @@
     },
     {
       Document: {
-        n: 1,
-        ok: 1.0
+        n: {
+          $numberInt: 1
+        },
+        ok: {
+          $numberDouble: 1.0
+        }
       },
       Type: Succeeded,
       Command: insert,
