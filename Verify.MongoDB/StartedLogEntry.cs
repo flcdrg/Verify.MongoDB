@@ -21,7 +21,7 @@ public class StartedLogEntry : LogEntryBase
     {
         Database = databaseName;
 
-        var jsonWriterSettings = new JsonWriterSettings {OutputMode = JsonOutputMode.Strict};
+        var jsonWriterSettings = new JsonWriterSettings {OutputMode = JsonOutputMode.CanonicalExtendedJson};
         Document = JObject.Parse(document.ToJson(jsonWriterSettings));
     }
 }

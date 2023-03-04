@@ -22,7 +22,7 @@ public class SucceededLogEntry : LogEntryBase
     {
         Duration = duration;
 
-        var jsonWriterSettings = new JsonWriterSettings {OutputMode = JsonOutputMode.Strict};
+        var jsonWriterSettings = new JsonWriterSettings {OutputMode = JsonOutputMode.CanonicalExtendedJson };
         Document = JObject.Parse(document.ToJson(jsonWriterSettings));
     }
 }
