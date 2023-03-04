@@ -14,7 +14,7 @@
       Command: find,
       StartTime: DateTimeOffset_1,
       OperationId: 2,
-      RequestId: 9
+      RequestId: 6
     },
     {
       Document: {
@@ -28,7 +28,7 @@
       Command: find,
       StartTime: DateTimeOffset_2,
       OperationId: 2,
-      RequestId: 9
+      RequestId: 6
     }
   ]
 }
