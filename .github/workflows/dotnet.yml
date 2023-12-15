@@ -84,14 +84,14 @@ jobs:
       if: github.ref == 'refs/heads/main'
 
     - name: Build logs
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: logs
         # A file, directory or wildcard pattern that describes what to upload
         path: '*.binlog'
 
     - name: NuGet Package
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: nupkg
         # A file, directory or wildcard pattern that describes what to upload
