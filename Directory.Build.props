@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
   <PropertyGroup>
-    <LangVersion>10</LangVersion>
+    <LangVersion Condition="'$(TargetFramework)' == 'netcoreapp3.1'">10</LangVersion> <!-- Required when using netcore3.1 -->
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
