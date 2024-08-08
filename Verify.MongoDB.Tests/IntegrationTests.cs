@@ -4,7 +4,6 @@ using MongoDB.Driver;
 
 namespace Verify.MongoDB.Tests;
 
-[UsesVerify]
 public class IntegrationTests : IDisposable
 {
     private IMongoRunner mongoRunner;
