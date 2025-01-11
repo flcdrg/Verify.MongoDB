@@ -1,6 +1,6 @@
-using EphemeralMongo;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoSandbox;
 
 namespace Verify.MongoDB.Tests;
 
