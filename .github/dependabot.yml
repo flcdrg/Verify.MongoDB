@@ -21,6 +21,7 @@ updates:
       dotnet:
         applies-to: version-updates
         update-types:
+          - "major"
           - "minor"
           - "patch"
         patterns:
