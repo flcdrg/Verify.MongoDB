@@ -17,3 +17,17 @@ updates:
     # We want to manually review these PRs, so use different label to that used by merge-dependabot.yml
     labels:
       - "dependencies-actions"
+    groups:
+      dotnet:
+        applies-to: version-updates
+        update-types:
+          - "minor"
+          - "patch"
+        patterns:
+          - "*" # Prefer a single PR per solution update.
+
+  - package-ecosystem: "dotnet-sdk"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "wednesday"
