@@ -10,15 +10,21 @@ jobs:
   dump:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+
     steps:
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
 
-  main:
+  nuget:
     runs-on: ubuntu-latest
- 
+
+    permissions:
+      contents: read
+
     steps:
       - name: Download Assets
         uses: i3h/download-release-asset@v1.3.3
@@ -32,4 +38,12 @@ jobs:
       - name: List directory
         run: ls -lR
 
-      # TODO Publish to NuGet.org    
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 9.0.x
+        env:
+          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Publish to NuGet.org
+        run: dotnet nuget push *.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
