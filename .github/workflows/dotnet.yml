@@ -80,14 +80,14 @@ jobs:
         run: dotnet test --no-build --verbosity normal
 
       - name: Build logs
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: logs
           # A file, directory or wildcard pattern that describes what to upload
           path: "*.binlog"
 
       - name: NuGet Package
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: nupkg
           # A file, directory or wildcard pattern that describes what to upload
@@ -111,7 +111,7 @@ jobs:
         with:
           version: ${{ needs.build.outputs.GitBuildVersionSimple }}
 
-      - uses: actions/download-artifact@v6
+      - uses: actions/download-artifact@v7
 
       - name: Display structure of downloaded files
         run: ls -R
@@ -145,7 +145,7 @@ jobs:
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions/download-artifact@v6
+      - uses: actions/download-artifact@v7
         with:
           name: nupkg
 
