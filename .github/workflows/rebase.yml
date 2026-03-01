@@ -1,9 +1,13 @@
 name: Rebase
 on:
   schedule:
-    - cron:  '0 0 * * *'
+    - cron: "0 0 * * *"
+  workflow_dispatch:
 jobs:
   rebase:
     runs-on: ubuntu-latest
     steps:
       - uses: peter-evans/rebase@v4
+        with:
+          # Specify user token so that other actions will trigger on the rebased commit
+          token: ${{ secrets.PAT_REPO_SCOPE }}
