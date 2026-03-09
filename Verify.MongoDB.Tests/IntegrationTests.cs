@@ -34,14 +34,14 @@ public class IntegrationTests : IDisposable
 
         var database = client.GetDatabase("VerifyTests");
 
-        await database.DropCollectionAsync("docs");
+        await database.DropCollectionAsync("docs", TestContext.Current.CancellationToken);
 
         var collection = database.GetCollection<BsonDocument>("docs");
 
         MongoDBRecording.StartRecording();
 
         await collection.FindAsync(Builders<BsonDocument>.Filter.Eq("_id", "blah"),
-            new FindOptions<BsonDocument, BsonDocument>());
+            new FindOptions<BsonDocument, BsonDocument>(), TestContext.Current.CancellationToken);
 
         await Verifier.Verify("collection");
     }
@@ -57,7 +57,7 @@ public class IntegrationTests : IDisposable
 
         var database = client.GetDatabase("VerifyTests");
 
-        await database.DropCollectionAsync("docs");
+        await database.DropCollectionAsync("docs", TestContext.Current.CancellationToken);
 
         var collection = database.GetCollection<BsonDocument>("docs");
 
@@ -66,7 +66,7 @@ public class IntegrationTests : IDisposable
         await collection.InsertOneAsync(new()
         {
             {"_id", "C2E1B774-A997-4818-B104-E915F7DCA9C1"}
-        });
+        }, cancellationToken: TestContext.Current.CancellationToken);
 
         await Verifier.Verify("collection");
     }
