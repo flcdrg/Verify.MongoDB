@@ -25,5 +25,7 @@ public static class VerifyMongoDb
         //},
         // Ignore as the binary value changes each time
         VerifierSettings.IgnoreMember("lsid");
+        VerifierSettings.IgnoreMember("OperationId");
+        VerifierSettings.IgnoreMember("RequestId");
     }
 }
