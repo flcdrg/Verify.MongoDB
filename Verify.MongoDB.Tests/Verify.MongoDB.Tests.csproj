@@ -12,7 +12,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.7.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.8.1" />
 		<PackageReference Include="MongoSandbox8" Version="1.0.1" />
 		<PackageReference Include="Verify.XunitV3" Version="31.24.1" />
 		<PackageReference Include="xunit.runner.visualstudio" Version="3.1.5">
