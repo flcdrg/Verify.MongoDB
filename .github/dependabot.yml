@@ -12,7 +12,7 @@ updates:
     groups:
       verify:
         patterns:
-          - "Verify.*"
+          - "Verify*"
 
   - package-ecosystem: "github-actions"
     directory: "/"
